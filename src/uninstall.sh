@@ -84,10 +84,10 @@ if [[ $is_uninstall_v2ray && $is_uninstall_caddy ]]; then
 	# [ $v2ray_pid ] && systemctl stop v2ray
 	[ $v2ray_pid ] && do_service stop v2ray
 
-	rm -rf /usr/bin/v2ray
+	rm -rf /usr/bin/rain
 	rm -rf $_v2ray_sh
-	rm -rf /etc/v2ray
-	rm -rf /var/log/v2ray
+	rm -rf /etc/rain
+	rm -rf /var/log/rain
 
 	# [ $caddy_pid ] && systemctl stop caddy
 	[ $caddy_pid ] && do_service stop caddy
@@ -98,14 +98,14 @@ if [[ $is_uninstall_v2ray && $is_uninstall_caddy ]]; then
 
 	if [[ $systemd ]]; then
 		systemctl disable v2ray >/dev/null 2>&1
-		rm -rf /lib/systemd/system/v2ray.service
+		rm -rf /lib/systemd/system/rain.service
 		systemctl disable caddy >/dev/null 2>&1
 		rm -rf /lib/systemd/system/caddy.service
 	else
 		update-rc.d -f caddy remove >/dev/null 2>&1
 		update-rc.d -f v2ray remove >/dev/null 2>&1
 		rm -rf /etc/init.d/caddy
-		rm -rf /etc/init.d/v2ray
+		rm -rf /etc/init.d/rain
 	fi
 	# clear
 	echo
@@ -146,16 +146,16 @@ elif [[ $is_uninstall_v2ray ]]; then
 	# [ $v2ray_pid ] && systemctl stop v2ray
 	[ $v2ray_pid ] && do_service stop v2ray
 
-	rm -rf /usr/bin/v2ray
+	rm -rf /usr/bin/rain
 	rm -rf $_v2ray_sh
-	rm -rf /etc/v2ray
-	rm -rf /var/log/v2ray
+	rm -rf /etc/rain
+	rm -rf /var/log/rain
 	if [[ $systemd ]]; then
 		systemctl disable v2ray >/dev/null 2>&1
-		rm -rf /lib/systemd/system/v2ray.service
+		rm -rf /lib/systemd/system/rain.service
 	else
 		update-rc.d -f v2ray remove >/dev/null 2>&1
-		rm -rf /etc/init.d/v2ray
+		rm -rf /etc/init.d/rain
 	fi
 	# clear
 	echo

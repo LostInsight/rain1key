@@ -1,5 +1,5 @@
 #!/bin/bash
-backup="/etc/v2ray/233blog_v2ray_backup.txt"
+backup="/etc/rain/rain_backup.txt"
 v2ray_transport=$(sed -n '17p' $backup)
 v2ray_port=$(sed -n '19p' $backup)
 v2ray_id=$(sed -n '21p' $backup)
@@ -28,7 +28,7 @@ if [[ $ws_path_status == "true" ]]; then
 	is_ws_path=true
 fi
 
-cat >/etc/v2ray/233blog_v2ray_backup.conf <<-EOF
+cat >/etc/rain/rain_backup.conf <<-EOF
 # -----------------------------------
 # 警告...请不要修改或删除这个文件...谢谢
 # 警告...请不要修改或删除这个文件...谢谢
@@ -117,11 +117,11 @@ mtproto_secret=lalala
 #---- 屏蔽 BT -----
 ban_bt=true
 		EOF
-if [[ -f /usr/local/bin/v2ray ]]; then
-	cp -f /etc/v2ray/233boy/v2ray/v2ray.sh /usr/local/sbin/v2ray
-	chmod +x /usr/local/sbin/v2ray
+if [[ -f /usr/local/bin/rain ]]; then
+	cp -f /etc/rain/repo/rain.sh /usr/local/sbin/rain
+	chmod +x /usr/local/sbin/rain
 	rm -rf $backup
-	rm -rf /usr/local/bin/v2ray
+	rm -rf /usr/local/bin/rain
 fi
 
 echo

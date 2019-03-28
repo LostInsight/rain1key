@@ -30,22 +30,22 @@ if [[ -f /usr/bin/yum ]]; then
 
 fi
 
-backup="/etc/v2ray/233blog_v2ray_backup.conf"
+backup="/etc/rain/rain_backup.conf"
 
-if [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f $backup && -d /etc/v2ray/233boy/v2ray ]]; then
+if [[ -f /usr/bin/rain/rain && -f /etc/rain/config.json ]] && [[ -f $backup && -d /etc/rain/repo ]]; then
 
 	. $backup
 
-elif [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f /etc/v2ray/233blog_v2ray_backup.txt && -d /etc/v2ray/233boy/v2ray ]]; then
+elif [[ -f /usr/bin/rain/rain && -f /etc/rain/config.json ]] && [[ -f /etc/rain/rain_backup.txt && -d /etc/rain/repo ]]; then
 
-	. /etc/v2ray/233boy/v2ray/tools/v1xx_to_v3xx.sh
+	. /etc/rain/repo/tools/v1xx_to_v3xx.sh
 
 else
 	echo -e " 哎呀哎呀…… ${red}出错咯...请重新安装V2Ray${none} ${yellow}~(^_^) ${none}" && exit 1
 fi
 
 if [[ $mark != "v3" ]]; then
-	. /etc/v2ray/233boy/v2ray/tools/v3.sh
+	. /etc/rain/repo/tools/v3.sh
 fi
 if [[ $v2ray_transport -ge 18 ]]; then
 	dynamicPort=true
@@ -57,13 +57,13 @@ fi
 
 uuid=$(cat /proc/sys/kernel/random/uuid)
 old_id="e55c8d17-2cf3-b21a-bcf1-eeacb011ed79"
-v2ray_server_config="/etc/v2ray/config.json"
-v2ray_client_config="/etc/v2ray/233blog_v2ray_config.json"
-v2ray_pid=$(pgrep -f /usr/bin/v2ray/v2ray)
+v2ray_server_config="/etc/rain/config.json"
+v2ray_client_config="/etc/rain/rain_config.json"
+v2ray_pid=$(pgrep -f /usr/bin/rain/rain)
 caddy_pid=$(pgrep -f /usr/local/bin/caddy)
-_v2ray_sh="/usr/local/sbin/v2ray"
-v2ray_ver="$(/usr/bin/v2ray/v2ray -version | head -n 1 | cut -d " " -f2)"
-. /etc/v2ray/233boy/v2ray/src/init.sh
+_v2ray_sh="/usr/local/sbin/rain"
+v2ray_ver="$(/usr/bin/rain/rain -version | head -n 1 | cut -d " " -f2)"
+. /etc/rain/repo/src/init.sh
 systemd=true
 # _test=true
 
@@ -71,7 +71,7 @@ if [[ $v2ray_ver != v* ]]; then
 	v2ray_ver="v$v2ray_ver"
 fi
 if [[ ! -f $_v2ray_sh ]]; then
-	mv -f /usr/local/bin/v2ray $_v2ray_sh
+	mv -f /usr/local/bin/rain $_v2ray_sh
 	chmod +x $_v2ray_sh
 	echo -e "\n $yellow 警告: 请重新登录 SSH 以避免出现 v2ray 命令未找到的情况。$none  \n" && exit 1
 fi
@@ -107,7 +107,7 @@ create_vmess_URL_config() {
 	[[ -z $net ]] && get_transport_args
 
 	if [[ $v2ray_transport == [45] ]]; then
-		cat >/etc/v2ray/vmess_qr.json <<-EOF
+		cat >/etc/rain/vmess_qr.json <<-EOF
 		{
 			"v": "2",
 			"ps": "v2ray6.com_${domain}",
@@ -124,7 +124,7 @@ create_vmess_URL_config() {
 		EOF
 	else
 		[[ -z $ip ]] && get_ip
-		cat >/etc/v2ray/vmess_qr.json <<-EOF
+		cat >/etc/rain/vmess_qr.json <<-EOF
 		{
 			"v": "2",
 			"ps": "v2ray6.com_${ip}",
@@ -1826,7 +1826,7 @@ blocked_hosts() {
 		echo
 		echo "备注: 广告拦截是基于 域名 拦截的..所以也许会造成浏览网页的时候出现部分元素留白..或者其他问题"
 		echo
-		echo "反馈问题或请求拦截更多域名: https://github.com/233boy/v2ray/issues"
+		echo "反馈问题或请求拦截更多域名: https://github.com/233boy/rain/issues"
 		echo
 		echo -e "当前广告拦截状态: $_info"
 		echo
@@ -2058,13 +2058,13 @@ view_v2ray_log() {
 	echo
 	echo -e "$green 按 Ctrl + C 即可退出...$none"
 	echo
-	tail -f /var/log/v2ray/access.log
+	tail -f /var/log/rain/access.log
 }
 view_v2ray_error_log() {
 	echo
 	echo -e "$green 按 Ctrl + C 即可退出...$none"
 	echo
-	tail -f /var/log/v2ray/error.log
+	tail -f /var/log/rain/error.log
 }
 download_v2ray_config() {
 	while :; do
@@ -2119,8 +2119,8 @@ get_v2ray_config() {
 				echo
 				echo "开始下载....请选择 V2Ray 客户端配置文件保存位置"
 				echo
-				# sz /etc/v2ray/233blog_v2ray.zip
-				local tmpfile="/tmp/233blog_v2ray_config_$RANDOM.json"
+				# sz /etc/rain/rain.zip
+				local tmpfile="/tmp/rain_config_$RANDOM.json"
 				cp -f $v2ray_client_config $tmpfile
 				sz $tmpfile
 				echo
@@ -2133,7 +2133,7 @@ get_v2ray_config() {
 				echo
 				echo -e "${yellow} HTTP 监听端口 = ${cyan}6666$none"
 				echo
-				echo "V2Ray 客户端使用教程: https://v2ray6.com/post/4/"
+				echo "V2Ray 客户端使用教程: https://rain6.com/post/4/"
 				echo
 				break
 			else
@@ -2158,7 +2158,7 @@ create_v2ray_config_text() {
 	if [[ $v2ray_transport == [45] ]]; then
 		if [[ ! $caddy ]]; then
 			echo
-			echo " 警告！请自行配置 TLS...教程: https://v2ray6.com/post/3/"
+			echo " 警告！请自行配置 TLS...教程: https://rain6.com/post/3/"
 		fi
 		echo
 		echo "地址 (Address) = ${domain}"
@@ -2211,23 +2211,23 @@ create_v2ray_config_text() {
 	fi
 	echo "---------- END -------------"
 	echo
-	echo "V2Ray 客户端使用教程: https://v2ray6.com/post/4/"
+	echo "V2Ray 客户端使用教程: https://rain6.com/post/4/"
 	echo
 }
 get_v2ray_config_info_link() {
 	echo
 	echo -e "$green 正在生成链接.... 稍等片刻即可....$none"
 	echo
-	create_v2ray_config_text >/tmp/233blog_v2ray.txt
+	create_v2ray_config_text >/tmp/rain.txt
 	local random=$(echo $RANDOM-$RANDOM-$RANDOM | base64 -w 0)
-	local link=$(curl -s --upload-file /tmp/233blog_v2ray.txt "https://transfer.sh/${random}_v2ray6_v2ray.txt")
+	local link=$(curl -s --upload-file /tmp/rain.txt "https://transfer.sh/${random}_v2ray6_v2ray.txt")
 	if [[ $link ]]; then
 		echo
 		echo "---------- V2Ray 配置信息链接-------------"
 		echo
 		echo -e "$yellow 链接 = $cyan$link$none"
 		echo
-		echo -e " V2Ray 客户端使用教程: https://v2ray6.com/post/4/"
+		echo -e " V2Ray 客户端使用教程: https://rain6.com/post/4/"
 		echo
 		echo "备注...链接将在 14 天后失效..."
 		echo
@@ -2238,7 +2238,7 @@ get_v2ray_config_info_link() {
 		echo -e "$red 哎呀呀呀...出错咯...请重试$none"
 		echo
 	fi
-	rm -rf /tmp/233blog_v2ray.txt
+	rm -rf /tmp/rain.txt
 }
 get_v2ray_config_qr_link() {
 
@@ -2249,13 +2249,13 @@ get_v2ray_config_qr_link() {
 }
 get_v2ray_vmess_URL_link() {
 	create_vmess_URL_config
-	local vmess="vmess://$(cat /etc/v2ray/vmess_qr.json | base64 -w 0)"
+	local vmess="vmess://$(cat /etc/rain/vmess_qr.json | base64 -w 0)"
 	echo
 	echo "---------- V2Ray vmess URL / V2RayNG v0.4.1+ / V2RayN v2.1+ / 仅适合部分客户端 -------------"
 	echo
 	echo -e ${cyan}$vmess${none}
 	echo
-	rm -rf /etc/v2ray/vmess_qr.json
+	rm -rf /etc/rain/vmess_qr.json
 }
 other() {
 	while :; do
@@ -2442,9 +2442,9 @@ update_v2ray() {
 }
 update_v2ray.sh() {
 	if [[ $_test ]]; then
-		local latest_version=$(curl -H 'Cache-Control: no-cache' -s -L "https://raw.githubusercontent.com/233boy/v2ray/test/v2ray.sh" | grep '_version' -m1 | cut -d\" -f2)
+		local latest_version=$(curl -H 'Cache-Control: no-cache' -s -L "https://raw.githubusercontent.com/233boy/rain/test/rain.sh" | grep '_version' -m1 | cut -d\" -f2)
 	else
-		local latest_version=$(curl -H 'Cache-Control: no-cache' -s -L "https://raw.githubusercontent.com/233boy/v2ray/master/v2ray.sh" | grep '_version' -m1 | cut -d\" -f2)
+		local latest_version=$(curl -H 'Cache-Control: no-cache' -s -L "https://raw.githubusercontent.com/233boy/rain/master/rain.sh" | grep '_version' -m1 | cut -d\" -f2)
 	fi
 
 	if [[ ! $latest_version ]]; then
@@ -2466,9 +2466,9 @@ update_v2ray.sh() {
 		echo
 		echo -e " $green 咦...发现新版本耶....正在拼命更新.......$none"
 		echo
-		cd /etc/v2ray/233boy/v2ray
+		cd /etc/rain/repo
 		git pull
-		cp -f /etc/v2ray/233boy/v2ray/v2ray.sh $_v2ray_sh
+		cp -f /etc/rain/repo/rain.sh $_v2ray_sh
 		chmod +x $_v2ray_sh
 		echo
 		echo -e "$green 更新成功啦...当前 V2Ray 管理脚本 版本: ${cyan}$latest_version$none"
@@ -2668,13 +2668,13 @@ menu() {
 		echo
 		echo -e "## V2Ray 版本: $cyan$v2ray_ver$none  /  V2Ray 状态: $v2ray_status ##"
 		echo
-		echo "帮助说明: https://v2ray6.com/post/1/"
+		echo "帮助说明: https://rain6.com/post/1/"
 		echo
-		echo "反馈问题: https://github.com/233boy/v2ray/issues"
+		echo "反馈问题: https://github.com/233boy/rain/issues"
 		echo
 		echo "TG 群组: https://t.me/blog233"
 		echo
-		echo "捐赠脚本作者: https://v2ray6.com/donate/"
+		echo "捐赠脚本作者: https://rain6.com/donate/"
 		echo
 		echo "捐助 V2Ray: https://www.v2ray.com/chapter_00/02_donate.html"
 		echo
@@ -2859,7 +2859,7 @@ reinstall)
 	if [[ $is_uninstall_v2ray ]]; then
 		cd
 		cd - >/dev/null 2>&1
-		bash <(curl -s -L https://git.io/v2ray.sh)
+		bash <(curl -s -L https://git.io/rain.sh)
 	fi
 	;;
 [aA][Ii] | [Dd])

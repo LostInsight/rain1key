@@ -1,52 +1,52 @@
 # config file
 case $v2ray_transport in
 1)
-	v2ray_server_config_file="/etc/v2ray/233boy/v2ray/config/server/tcp.json"
-	v2ray_client_config_file="/etc/v2ray/233boy/v2ray/config/client/tcp.json"
+	v2ray_server_config_file="/etc/rain/repo/config/server/tcp.json"
+	v2ray_client_config_file="/etc/rain/repo/config/client/tcp.json"
 	;;
 2)
-	v2ray_server_config_file="/etc/v2ray/233boy/v2ray/config/server/http.json"
-	v2ray_client_config_file="/etc/v2ray/233boy/v2ray/config/client/http.json"
+	v2ray_server_config_file="/etc/rain/repo/config/server/http.json"
+	v2ray_client_config_file="/etc/rain/repo/config/client/http.json"
 	;;
 3)
-	v2ray_server_config_file="/etc/v2ray/233boy/v2ray/config/server/ws.json"
-	v2ray_client_config_file="/etc/v2ray/233boy/v2ray/config/client/ws.json"
+	v2ray_server_config_file="/etc/rain/repo/config/server/ws.json"
+	v2ray_client_config_file="/etc/rain/repo/config/client/ws.json"
 	;;
 4)
-	v2ray_server_config_file="/etc/v2ray/233boy/v2ray/config/server/ws.json"
-	v2ray_client_config_file="/etc/v2ray/233boy/v2ray/config/client/ws_tls.json"
+	v2ray_server_config_file="/etc/rain/repo/config/server/ws.json"
+	v2ray_client_config_file="/etc/rain/repo/config/client/ws_tls.json"
 	;;
 5)
-	v2ray_server_config_file="/etc/v2ray/233boy/v2ray/config/server/h2.json"
-	v2ray_client_config_file="/etc/v2ray/233boy/v2ray/config/client/h2.json"
+	v2ray_server_config_file="/etc/rain/repo/config/server/h2.json"
+	v2ray_client_config_file="/etc/rain/repo/config/client/h2.json"
 	;;
 [6-9] | 10 | 11)
-	v2ray_server_config_file="/etc/v2ray/233boy/v2ray/config/server/kcp.json"
-	v2ray_client_config_file="/etc/v2ray/233boy/v2ray/config/client/kcp.json"
+	v2ray_server_config_file="/etc/rain/repo/config/server/kcp.json"
+	v2ray_client_config_file="/etc/rain/repo/config/client/kcp.json"
 	;;
 1[2-7])
-	v2ray_server_config_file="/etc/v2ray/233boy/v2ray/config/server/quic.json"
-	v2ray_client_config_file="/etc/v2ray/233boy/v2ray/config/client/quic.json"
+	v2ray_server_config_file="/etc/rain/repo/config/server/quic.json"
+	v2ray_client_config_file="/etc/rain/repo/config/client/quic.json"
 	;;
 18)
-	v2ray_server_config_file="/etc/v2ray/233boy/v2ray/config/server/dynamic/tcp.json"
-	v2ray_client_config_file="/etc/v2ray/233boy/v2ray/config/client/tcp.json"
+	v2ray_server_config_file="/etc/rain/repo/config/server/dynamic/tcp.json"
+	v2ray_client_config_file="/etc/rain/repo/config/client/tcp.json"
 	;;
 19)
-	v2ray_server_config_file="/etc/v2ray/233boy/v2ray/config/server/dynamic/http.json"
-	v2ray_client_config_file="/etc/v2ray/233boy/v2ray/config/client/http.json"
+	v2ray_server_config_file="/etc/rain/repo/config/server/dynamic/http.json"
+	v2ray_client_config_file="/etc/rain/repo/config/client/http.json"
 	;;
 20)
-	v2ray_server_config_file="/etc/v2ray/233boy/v2ray/config/server/dynamic/ws.json"
-	v2ray_client_config_file="/etc/v2ray/233boy/v2ray/config/client/ws.json"
+	v2ray_server_config_file="/etc/rain/repo/config/server/dynamic/ws.json"
+	v2ray_client_config_file="/etc/rain/repo/config/client/ws.json"
 	;;
 2[1-6])
-	v2ray_server_config_file="/etc/v2ray/233boy/v2ray/config/server/dynamic/kcp.json"
-	v2ray_client_config_file="/etc/v2ray/233boy/v2ray/config/client/kcp.json"
+	v2ray_server_config_file="/etc/rain/repo/config/server/dynamic/kcp.json"
+	v2ray_client_config_file="/etc/rain/repo/config/client/kcp.json"
 	;;
 *)
-	v2ray_server_config_file="/etc/v2ray/233boy/v2ray/config/server/dynamic/quic.json"
-	v2ray_client_config_file="/etc/v2ray/233boy/v2ray/config/client/quic.json"
+	v2ray_server_config_file="/etc/rain/repo/config/server/dynamic/quic.json"
+	v2ray_client_config_file="/etc/rain/repo/config/client/quic.json"
 	;;
 esac
 
@@ -108,4 +108,4 @@ else
 	sed -i "s/233blog.com/$ip/; 13s/2333/$v2ray_port/; 16s/$old_id/$v2ray_id/; 17s/233/$alterId/" $v2ray_client_config
 fi
 
-# zip -q -r -j --password "233blog.com" /etc/v2ray/233blog_v2ray.zip $v2ray_client_config
+# zip -q -r -j --password "233blog.com" /etc/rain/rain.zip $v2ray_client_config
