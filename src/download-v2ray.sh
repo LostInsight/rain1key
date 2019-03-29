@@ -38,6 +38,7 @@ _install_v2ray_service() {
 	if [[ $systemd ]]; then
 		cp -f "/tmp/rain/systemd/v2ray.service" "/lib/systemd/system/rain.service"
 		sed -i "s/on-failure/always/" /lib/systemd/system/rain.service
+		sed -i "s/v2ray/rain/g" /lib/systemd/system/rain.service
 		systemctl enable rain
 	else
 		apt-get install -y daemon
