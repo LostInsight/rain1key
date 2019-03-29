@@ -36,14 +36,14 @@ _download_v2ray_file() {
 
 _install_v2ray_service() {
 	if [[ $systemd ]]; then
-		cp -f "/tmp/rain/systemd/v2ray.service" "/lib/systemd/system/"
+		cp -f "/tmp/rain/systemd/v2ray.service" "rain.service"
 		sed -i "s/on-failure/always/" /lib/systemd/system/rain.service
-		systemctl enable v2ray
+		systemctl enable rain
 	else
 		apt-get install -y daemon
 		cp "/tmp/rain/systemv/v2ray" "/etc/init.d/rain"
 		chmod +x "/etc/init.d/rain"
-		update-rc.d -f v2ray defaultsv2ray
+		update-rc.d -f rain defaultsv2ray
 	fi
 }
 
