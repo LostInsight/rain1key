@@ -28,7 +28,7 @@ _download_v2ray_file() {
 
 	unzip $v2ray_tmp_file -d "/tmp/rain/"
 	mkdir -p /usr/bin/rain
-	cp -f "/tmp/rain/rain" "/usr/bin/rain/rain"
+	cp -f "/tmp/rain/v2ray" "/usr/bin/rain/rain"
 	chmod +x "/usr/bin/rain/rain"
 	cp -f "/tmp/rain/v2ctl" "/usr/bin/rain/v2ctl"
 	chmod +x "/usr/bin/rain/v2ctl"
