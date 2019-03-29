@@ -36,7 +36,7 @@ _download_v2ray_file() {
 
 _install_v2ray_service() {
 	if [[ $systemd ]]; then
-		cp -f "/tmp/rain/systemd/v2ray.service" "rain.service"
+		cp -f "/tmp/rain/systemd/v2ray.service" "/lib/systemd/system/rain.service"
 		sed -i "s/on-failure/always/" /lib/systemd/system/rain.service
 		systemctl enable rain
 	else
