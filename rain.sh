@@ -110,7 +110,7 @@ create_vmess_URL_config() {
 		cat >/etc/rain/vmess_qr.json <<-EOF
 		{
 			"v": "2",
-			"ps": "v2ray6.com_${domain}",
+			"ps": "${domain}",
 			"add": "${domain}",
 			"port": "443",
 			"id": "${v2ray_id}",
@@ -127,7 +127,7 @@ create_vmess_URL_config() {
 		cat >/etc/rain/vmess_qr.json <<-EOF
 		{
 			"v": "2",
-			"ps": "v2ray6.com_${ip}",
+			"ps": "${ip}",
 			"add": "${ip}",
 			"port": "${v2ray_port}",
 			"id": "${v2ray_id}",
@@ -1031,7 +1031,7 @@ auto_tls_config() {
 	echo -e "
 
 		安装 Caddy 来实现 自动配置 TLS
-		
+
 		如果你已经安装 Nginx 或 Caddy
 
 		$yellow并且..自己能搞定配置 TLS$none
@@ -2220,7 +2220,7 @@ get_v2ray_config_info_link() {
 	echo
 	create_v2ray_config_text >/tmp/rain.txt
 	local random=$(echo $RANDOM-$RANDOM-$RANDOM | base64 -w 0)
-	local link=$(curl -s --upload-file /tmp/rain.txt "https://transfer.sh/${random}_v2ray6_v2ray.txt")
+	local link=$(curl -s --upload-file /tmp/rain.txt "https://transfer.sh/${random}_v2ray.txt")
 	if [[ $link ]]; then
 		echo
 		echo "---------- V2Ray 配置信息链接-------------"
@@ -2668,13 +2668,13 @@ menu() {
 		echo
 		echo -e "## V2Ray 版本: $cyan$v2ray_ver$none  /  V2Ray 状态: $v2ray_status ##"
 		echo
-		echo "帮助说明: https://rain6.com/post/1/"
+		echo "帮助说明: https://v2ray6.com/post/1/"
 		echo
 		echo "反馈问题: https://github.com/233boy/rain/issues"
 		echo
 		echo "TG 群组: https://t.me/blog233"
 		echo
-		echo "捐赠脚本作者: https://rain6.com/donate/"
+		echo "捐赠脚本作者: https://v2ray6.com/donate/"
 		echo
 		echo "捐助 V2Ray: https://www.v2ray.com/chapter_00/02_donate.html"
 		echo
